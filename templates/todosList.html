@@ -1,0 +1,9 @@
+{% if todos|length > 0 %}
+<div>
+  {% for item in todos %}
+  <p>{{item.title}}</p>
+  {% endfor %}
+</div>
+{% else %}
+<p>No todos found</p>
+{% endif %}

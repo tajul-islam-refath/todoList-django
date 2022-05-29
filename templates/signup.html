@@ -1,0 +1,57 @@
+{% extends 'base.html' %} {% block title %}
+<title>Todo-SignUp</title>
+{% endblock %} {% block content %}
+<div class="container signup">
+  <div class="row h-100 justify-content-center align-items-center">
+    <div class="col-md-6">
+      <div class="card card-body">
+        <form action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <h3 class="text-center">Sign Up</h3>
+          <div class="mb-3">
+            <label for="username" class="form-label">User Name</label>
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              id="username"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input
+              type="email"
+              name="email"
+              class="form-control"
+              name="email"
+              id="email"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              id="password"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="profile" class="form-label">Profile Image</label>
+            <input
+              type="file"
+              name="profile"
+              class="form-control"
+              id="profile"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary text-center w-100">
+            Sign Up
+          </button>
+        </form>
+        <a href="{% url 'signin' %}">Already have an account?</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

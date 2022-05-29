@@ -1,0 +1,77 @@
+{% extends 'base.html' %} {% block title %} <title>Todo-Home</title>
+{% endblock %} {% block content %}
+<h1 class="text-center mt-lg-3">Todo List</h1>
+<div class="row mt-lg-4">
+  <div class="col-md-10">
+    <input type="text" class="form-control" placeholder="Enter Search Todo" />
+  </div>
+  <div class="col-md-2">
+    <div class="d-grid gap-2">
+      <button
+        type="button"
+        class="btn btn-success"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        New Todo
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Todos -->
+<div class="row mt-lg-3">
+  {% if todos|length > 0 %}
+  <div>
+    {% for todo in todos %}
+    <div class="card card-body">
+      <div class="d-flex">
+        <div class="mx-3">
+          <h1>{{todo.title}}</h1>
+          <p>{{todo.created_at}}</p>
+          {% comment %}
+          <p>{{todo.isDone}}</p>
+          {% endcomment %}
+        </div>
+        <div class="ms-auto d-flex flex-column">
+          {% if todo.isDone %}
+          <button type="button" class="btn btn-success">
+            <a
+              style="color: #ffff; text-decoration: none"
+              href="{% url 'todo_update_is_done' id=todo.id %}"
+            >
+              {% if todo.isDone %} Done {% else %} Running {% endif %}
+            </a>
+          </button>
+          {% else %}
+          <button type="button" class="btn btn-warning" color="danger">
+            <a
+              style="color: #ffff; text-decoration: none"
+              href="{% url 'todo_update_is_done' id=todo.id %}"
+            >
+              {% if todo.isDone %} Done {% else %} Running {% endif %}
+            </a>
+          </button>
+          {% endif %}
+          <button type="button" class="btn btn-danger my-lg-1">
+            <a
+              style="color: #ffff; text-decoration: none"
+              href="{% url 'todo_delete' id=todo.id %}"
+            >
+              Delete
+            </a>
+          </button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="alert alert-warning" role="alert">
+    No Todos Found. Please Create a new one first
+  </div>
+  {% endif %}
+</div>
+
+<!-- Modal -->
+{% include 'modal.html' %} {% endblock %}
